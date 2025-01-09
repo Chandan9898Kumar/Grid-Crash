@@ -5,7 +5,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-
+const WorkboxPlugin = require("workbox-webpack-plugin");
 module.exports = {
   name: "React Webpack",
 
@@ -73,6 +73,10 @@ module.exports = {
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
+    }),
+    new WorkboxPlugin.InjectManifest({
+      swSrc: "./src/serviceWorker.js",
+      swDest: "service-worker.js",
     }),
   ],
 
