@@ -15,7 +15,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "process": "^0.11.10"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "html-loader": "^5.0.0",
     "@babel/core": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
     "@babel/preset-react": "^7.22.15",
@@ -53,7 +55,10 @@
     "cross-env": "^7.0.3",
     "webpack-cli": "^6.0.1",
     "webpack": "^5.88.2",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "webpack-clean-obsolete-chunks": "^0.4.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "compression-webpack-plugin": "^11.1.0"
   },
   "author": "Chandan Kumar",
   "license": "MIT",

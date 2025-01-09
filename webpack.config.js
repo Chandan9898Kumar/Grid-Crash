@@ -1,25 +1,93 @@
 const path = require("path"); //path is now a module that has access to pre defined methods that are built into Node.js
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //to use a plugin with webpack, you must use require
+const CleanObsoleteChunks = require("webpack-clean-obsolete-chunks");
+const CompressionPlugin = require("compression-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js", //this is where webpack will start its dependency graph, and will automatically figure out with modules depend on this entry point
+  name: "React Webpack",
+
+  entry: "./src/index.js",
+
   output: {
-    //output is where our production code will be sent to
-    path: path.join(__dirname, "/dist"), //__dirname represents the current directory, /dist is the folder that will contain our production code
-    filename: "bundle.js", //the bundled js file
+    path: path.join(__dirname, "/build"),
+    pathinfo: true,
+    filename:
+      process.env.NODE_ENV === "production"
+        ? "[name].[chunkhash].js"
+        : "[name].[fullhash].js",
+    chunkFilename:
+      process.env.NODE_ENV === "production"
+        ? "chunk.[name].[chunkhash].js"
+        : "chunk.[name].[fullhash].js",
+    libraryTarget: "umd",
+    clean: true, // Clean the output directory before emit.
+    assetModuleFilename: "[name][ext]",
+    sourceMapFilename: "[name].js.map",
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      //this plugin will help us generate the production html file in our /dist
+      //this plugin will help us generate the production html file in our /build
       filename: "index.html", //our production html file will be named index.html
       template: "./src/index.html", //this is a template for our production html file, we are defining how the html will look like before we make our production html file
       favicon: "./src/Common/Icons/tic.png",
+      minify: {
+        removeComments: true,
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+      },
+      inject: true,
+      hash: true,
+      title: "development",
+      description: "HtmlWebpackPlugin",
+    }),
+
+    new CleanObsoleteChunks({
+      verbose: true,
+      deep: true,
+    }),
+
+    new CleanWebpackPlugin({
+      root: process.cwd(),
+      verbose: true,
+      dry: false,
+      cleanOnceBeforeBuildPatterns: [
+        "**/*",
+        "!stats.json",
+        "!important.js",
+        "!folder/**/*",
+      ],
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+    new CompressionPlugin({
+      filename: "[path][base].gz",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
+
   devServer: {
-    //configuration property for the development server
-    port: 3001, //the devServer will start in port 3000
-    historyApiFallback: true, //this property helps with routing in our react app, everytime we refresh the page, react router will send a request to a server, but this property will make sure it searches for an index file first
+    port: 3001,
+    historyApiFallback: true,
+    compress: true,
+    hot: true,
+    host: "localhost",
+    server: "http",
+    allowedHosts: "auto",
+    client: {
+      progress: true,
+      reconnect: true,
+    },
   },
 
   module: {
@@ -42,4 +110,29 @@ module.exports = {
       },
     ],
   },
+
+  optimization: {
+    minimize: true,
+    runtimeChunk: true,
+    splitChunks: false,
+    removeAvailableModules: true,
+    removeEmptyChunks: true,
+    mergeDuplicateChunks: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        test: /\.js(\?.*)?$/i,
+        terserOptions: {
+          compress: false,
+          mangle: true,
+          output: { comments: false, ascii_only: true },
+        },
+      }),
+    ],
+    flagIncludedChunks: true,
+    usedExports: true,
+    sideEffects: true,
+  },
+
+  performance: false,
 };
