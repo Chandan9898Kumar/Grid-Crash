@@ -5,34 +5,27 @@ import { useNavigate } from "react-router-dom";
 import logo from "./icons";
 import styles from "./styles.module.css";
 
-const CpuButton = () => {
-  return (
-    <motion.button className={styles.cpuButton}>
-      {" "}
-      New Game ( Vs CPU )
-    </motion.button>
-  );
-};
+const CpuButton = React.memo(({ variants }) => (
+  <motion.button className={styles.cpuButton} variants={variants}>
+    New Game (Vs CPU)
+  </motion.button>
+));
 
-const PlayerButton = () => {
-  return (
-    <motion.button className={styles.playerButton}>
-      New Game ( Vs Player )
-    </motion.button>
-  );
-};
+const PlayerButton = React.memo(({ variants }) => (
+  <motion.button className={styles.playerButton} variants={variants}>
+    New Game (Vs Player)
+  </motion.button>
+));
 
-const Image = ({ variants }) => {
-  return (
-    <motion.img
-      className={styles.logo}
-      src={logo}
-      variants={variants}
-      alt="logo"
-      loading="lazy"
-    />
-  );
-};
+const Image = React.memo(({ variants }) => (
+  <motion.img
+    className={styles.logo}
+    src={logo}
+    variants={variants}
+    alt="logo"
+    loading="lazy"
+  />
+));
 
 const MainMenu = () => {
   const variants = {
@@ -52,9 +45,8 @@ const MainMenu = () => {
       transition={{ staggerChildren: 0.6 }}
     >
       <Image variants={variants} />
-      <CpuButton />
-      <PlayerButton />
-      
+      <CpuButton variants={variants} />
+      <PlayerButton variants={variants} />
     </motion.div>
   );
 };
