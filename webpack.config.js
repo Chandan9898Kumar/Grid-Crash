@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = {
   name: "React Webpack",
 
@@ -35,10 +36,19 @@ module.exports = {
       template: "./src/index.html", //this is a template for our production html file, we are defining how the html will look like before we make our production html file
       favicon: "./src/Common/Icons/tic.png",
       minify: {
-        removeComments: true,
-        removeAttributeQuotes: true,
         collapseWhitespace: true,
         collapseBooleanAttributes: true,
+        useShortDoctype: true,
+        removeComments: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        removeRedundantAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+        
       },
       inject: true,
       hash: true,
@@ -64,7 +74,7 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: '[name].[contenthash].css',
       chunkFilename: "[id].css",
     }),
     new CompressionPlugin({
@@ -132,6 +142,7 @@ module.exports = {
           output: { comments: false, ascii_only: true },
         },
       }),
+      new CssMinimizerPlugin(),
     ],
     flagIncludedChunks: true,
     usedExports: true,
