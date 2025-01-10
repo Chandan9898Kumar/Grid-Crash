@@ -1,3 +1,31 @@
+@font-face {
+  font-family: "outfit";
+  src: url("./Fonts/Outfit-VariableFont_wght.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  transition: all 0.2s linear;
+}
+
+:root {
+  --font: "outfit";
+  --Silver: #a8bfc9;
+  --Silver-Hover: #dbe8ed;
+  --Semi-Dark-Navy: #1f3641;
+  --Dark-Navy: #1a2a33;
+  --Light-Yellow: #f2b137;
+  --light-yellow-hover: #ffc860;
+  --Light-Blue: #31c3bd;
+  --light-blue-hover: #65e9e4;
+  --closest: 100;
+  --closer: 75;
+  --close: 50;
+  --far: 25;
+  --farthest: 0;
+}
 
 [data-theme="dark"] {
   --bg-color: #121212;
@@ -16,9 +44,8 @@
 }
 
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  transition: all 0.8s linear;
+  min-height: 100vh;
+  background-color: var(--Dark-Navy);
 }
 
 a {

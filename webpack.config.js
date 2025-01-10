@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
   name: "React Webpack",
 
@@ -48,7 +48,6 @@ module.exports = {
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
-        
       },
       inject: true,
       hash: true,
@@ -74,7 +73,7 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: "[name].[contenthash].css",
       chunkFilename: "[id].css",
     }),
     new CompressionPlugin({
@@ -109,6 +108,7 @@ module.exports = {
       {
         //loaders are transformations that are applied to files (typescript to javascript, sass to css)
         test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader", //for all .js files, we will load the babel transpiler
           options: { presets: ["@babel/preset-env", "@babel/preset-react"] }, //preset-env is a group of babel plugins that will transpile all the new features of javascript
@@ -121,6 +121,30 @@ module.exports = {
       {
         test: /\.(png|jpg|webp|mp4|wav|svg)$/,
         type: "asset/resource", //asset/resource loads files such as images, audio and videos
+        use: [
+          {
+            loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
+              optipng: {
+                enabled: true,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
       },
     ],
   },

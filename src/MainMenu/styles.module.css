@@ -1,0 +1,77 @@
+.container {
+  width: 460px;
+  height: 472px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+.logo {
+  width: 72px;
+  object-fit: contain;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.cpuButton,
+.playerButton {
+  cursor: pointer;
+  width: 460px;
+  height: 67px;
+  border-radius: 15px;
+  border: none;
+  color: var(--Dark-Navy);
+  font-family: var(--font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  position: relative;
+  bottom: 0px;
+}
+
+.cpuButton {
+  background-color: var(--Light-Yellow);
+  box-shadow: 0px 8px 0px 0px #cc8b13;
+}
+
+.cpuButton:hover {
+  bottom: 5px;
+  box-shadow: 0px 13px 0px 0px #cc8b13;
+  background-color: var(--light-yellow-hover);
+}
+
+.playerButton {
+  background-color: var(--Light-Blue);
+  box-shadow: 0px 8px 0px 0px #118c87;
+}
+
+.playerButton:hover {
+  bottom: 5px;
+  box-shadow: 0px 13px 0px 0px #118c87;
+  background-color: var(--light-blue-hover);
+}
+
+@media (max-width: 540px) {
+  .container {
+    width: 327px;
+    gap: 16px;
+  }
+
+  .logo {
+    margin-bottom: 16px;
+  }
+
+  .cpuButton,
+  .playerButton {
+    width: 327px;
+    height: 56px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+}
