@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+
 import App from "./App";
 import ThemeManager from "./Context";
 
@@ -11,11 +11,11 @@ jest.mock("./Common/CircularLoader", () => () => <div>Loading...</div>);
 describe("App", () => {
   test("renders MainMenu component for the root route", async () => {
     render(
-      <BrowserRouter>
+      
         <ThemeManager>
           <App />
         </ThemeManager>
-      </BrowserRouter>
+      
     );
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
@@ -27,11 +27,11 @@ describe("App", () => {
     window.history.pushState({}, "Game Page", "/game");
 
     render(
-      <BrowserRouter>
+      
         <ThemeManager>
           <App />
         </ThemeManager>
-      </BrowserRouter>
+     
     );
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
