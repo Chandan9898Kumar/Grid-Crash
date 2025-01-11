@@ -29,6 +29,16 @@ module.exports = {
     sourceMapFilename: "[name].js.map",
   },
 
+  resolve: {
+    extensions: [".js", ".jsx", ".json"], // Automatically resolve certain extensions
+    alias: {
+      App: path.resolve(__dirname, "src/App.js"), // Alias for App.js
+      Components: path.resolve(__dirname, "src/components/"), // Alias for components directory
+      Common: path.resolve(__dirname, "src/Common/"), // Alias for common directory
+    },
+    modules: [path.resolve(__dirname, "src"), "node_modules"], // Look for modules in src and node_modules
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       //this plugin will help us generate the production html file in our /build

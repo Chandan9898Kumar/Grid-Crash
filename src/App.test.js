@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import App from "App"; // Using alias for App.js
 import ThemeManager from "./Context";
 
 jest.mock("./MainMenu", () => () => <div>MainMenu Component</div>);

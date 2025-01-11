@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Suspense, lazy } from "react";
 // import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoaderPage from "./Common/CircularLoader";
+import LoaderPage from "Common/CircularLoader";  // Using alias for Common directory
 
 const lazyWithRetry = (componentImport) =>
   lazy(async () => {
