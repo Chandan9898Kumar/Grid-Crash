@@ -1,9 +1,11 @@
+import LoaderPage from "Common/CircularLoader";
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "./icons";
 import styles from "./styles.module.css";
+const SelectMark = lazy(() => import("./SelectMark"));
 
 const CpuButton = React.memo(({ variants }) => (
   <motion.button className={styles.cpuButton} variants={variants}>
@@ -45,6 +47,9 @@ const MainMenu = () => {
       transition={{ staggerChildren: 0.6 }}
     >
       <Image variants={variants} />
+      <Suspense fallback={<LoaderPage />}>
+        <SelectMark variants={variants} />
+      </Suspense>
       <CpuButton variants={variants} />
       <PlayerButton variants={variants} />
     </motion.div>

@@ -1,0 +1,105 @@
+.container {
+  width: 100%;
+  height: 205px;
+  background-color: var(--Semi-Dark-Navy);
+  padding: 0px 24px;
+  box-shadow: 0px -8px 0px 0px #10212a inset;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 20px;
+  transition: width 0.2s linear;
+}
+
+.title {
+  color: var(--Silver);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+
+.selectMark {
+  width: 100%;
+  height: 72px;
+  background-color: var(--Dark-Navy);
+  border-radius: 10px;
+  padding: 9px 8px;
+  position: relative;
+}
+.xButton,
+.oButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  width: 50%;
+  height: 100%;
+  background-color: transparent;
+  position: relative;
+  z-index: var(--closest);
+  &:hover {
+    background-color: rgba(165, 182, 189, 0.05);
+  }
+}
+
+.selectedXBackground,
+.selectedOBackground {
+  width: 198px;
+  height: 54px;
+  border-radius: 10px;
+  background-color: #a8bfc9;
+  position: absolute;
+  transition: width 0.2s linear;
+  z-index: var(--closer);
+}
+
+.selectedXBackground {
+  left: 8px;
+}
+
+.selectedOBackground {
+  right: 8px;
+}
+
+.icons {
+  width: 32px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.message {
+  color: var(--Silver);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: var(--font);
+  font-size: 0.975rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.875px;
+  opacity: 0.6;
+}
+
+@media (max-width: 540px) {
+  .container {
+    width: 327px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .selectedXBackground,
+  .selectedOBackground {
+    width: 132px;
+  }
+}
