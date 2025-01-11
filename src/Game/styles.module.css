@@ -1,0 +1,16 @@
+.container {
+  width: 460px;
+  height: 623px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+@media (max-width: 550px) {
+  .container {
+    width: 328px;
+  }
+}

@@ -1,22 +1,30 @@
 import LoaderPage from "Common/CircularLoader";
 import { motion } from "framer-motion";
-import React, { lazy, Suspense, useEffect, memo } from "react";
+import React, { lazy, Suspense, useEffect, memo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "./icons";
 import styles from "./styles.module.css";
 const SelectMark = lazy(() => import("./SelectMark"));
 
-const CpuButton = ({ variants }) => (
-  <motion.button className={styles.cpuButton} variants={variants}>
+const CpuButton = ({ variants, playAgainstCpu }) => (
+  <motion.button
+    onClick={playAgainstCpu}
+    className={styles.cpuButton}
+    variants={variants}
+  >
     New Game (Vs CPU)
   </motion.button>
 );
 
 const DisplayCpuButton = memo(CpuButton);
 
-const PlayerButton = ({ variants }) => (
-  <motion.button className={styles.playerButton} variants={variants}>
+const PlayerButton = ({ variants, playAgainstPlayer }) => (
+  <motion.button
+    onClick={playAgainstPlayer}
+    className={styles.playerButton}
+    variants={variants}
+  >
     New Game (Vs Player)
   </motion.button>
 );
@@ -36,6 +44,8 @@ const Image = ({ variants }) => (
 const DisplayImage = memo(Image);
 
 const MainMenu = () => {
+  const navigate = useNavigate();
+
   const variants = {
     hidden: {
       scale: 0,
@@ -45,6 +55,15 @@ const MainMenu = () => {
       transition: { type: "spring", stiffness: 150, damping: 6 },
     },
   };
+
+  const playAgainstCpu = useCallback(() => {
+    navigate("/game");
+  }, [navigate]);
+
+  const playAgainstPlayer = useCallback(() => {
+    navigate("/game");
+  }, [navigate]);
+
   return (
     <motion.div
       className={styles.container}
@@ -56,8 +75,11 @@ const MainMenu = () => {
       <Suspense fallback={<LoaderPage />}>
         <SelectMark variants={variants} />
       </Suspense>
-      <DisplayCpuButton variants={variants} />
-      <DisplayPlayerButton variants={variants} />
+      <DisplayCpuButton variants={variants} playAgainstCpu={playAgainstCpu} />
+      <DisplayPlayerButton
+        variants={variants}
+        playAgainstPlayer={playAgainstPlayer}
+      />
     </motion.div>
   );
 };
