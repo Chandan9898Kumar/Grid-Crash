@@ -1,25 +1,29 @@
 import LoaderPage from "Common/CircularLoader";
 import { motion } from "framer-motion";
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "./icons";
 import styles from "./styles.module.css";
 const SelectMark = lazy(() => import("./SelectMark"));
 
-const CpuButton = React.memo(({ variants }) => (
+const CpuButton = ({ variants }) => (
   <motion.button className={styles.cpuButton} variants={variants}>
     New Game (Vs CPU)
   </motion.button>
-));
+);
 
-const PlayerButton = React.memo(({ variants }) => (
+const DisplayCpuButton = memo(CpuButton);
+
+const PlayerButton = ({ variants }) => (
   <motion.button className={styles.playerButton} variants={variants}>
     New Game (Vs Player)
   </motion.button>
-));
+);
 
-const Image = React.memo(({ variants }) => (
+const DisplayPlayerButton = memo(PlayerButton);
+
+const Image = ({ variants }) => (
   <motion.img
     className={styles.logo}
     src={logo}
@@ -27,7 +31,9 @@ const Image = React.memo(({ variants }) => (
     alt="logo"
     loading="lazy"
   />
-));
+);
+
+const DisplayImage = memo(Image);
 
 const MainMenu = () => {
   const variants = {
@@ -46,12 +52,12 @@ const MainMenu = () => {
       animate={"show"}
       transition={{ staggerChildren: 0.6 }}
     >
-      <Image variants={variants} />
+      <DisplayImage variants={variants} />
       <Suspense fallback={<LoaderPage />}>
         <SelectMark variants={variants} />
       </Suspense>
-      <CpuButton variants={variants} />
-      <PlayerButton variants={variants} />
+      <DisplayCpuButton variants={variants} />
+      <DisplayPlayerButton variants={variants} />
     </motion.div>
   );
 };

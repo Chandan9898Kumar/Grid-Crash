@@ -5,15 +5,19 @@ import styles from "./styles.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 
-const DisplayHeader = memo(() => (
-  <h1 className={styles.title}>PICK PLAYER 1'S MARK</h1>
-));
+const Header = () => {
+  return <h1 className={styles.title}>PICK PLAYER 1'S MARK</h1>;
+};
 
-const DisplayMessage = memo(() => (
+const DisplayHeader = memo(Header);
+
+const Message = () => (
   <h2 className={styles.message}>REMEMBER : X GOES FIRST</h2>
-));
+);
 
-const DisplayButton = memo(({ mark, handleMark }) => (
+const DisplayMessage = memo(Message);
+
+const Button = ({ mark, handleMark }) => (
   <div className={styles.selectMark}>
     {mark === "x" && (
       <motion.div layoutId="mark" className={styles.selectedXBackground} />
@@ -38,14 +42,16 @@ const DisplayButton = memo(({ mark, handleMark }) => (
       />
     </button>
   </div>
-));
+);
+
+const DisplayButton = memo(Button);
 
 const SelectMark = ({ variants }) => {
   const mark = "x";
-//   const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
   const handleMark = useCallback((e) => {
     const markSelected = e.target.getAttribute("data-id");
-   
+
     //   dispatch({ type: "UPDATE_MARK", mark: markSelected });
   }, []);
 
