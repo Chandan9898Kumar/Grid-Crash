@@ -1,0 +1,37 @@
+.container {
+  width: 140px;
+  height: 52px;
+  border-radius: 10px;
+  background-color: var(--Semi-Dark-Navy);
+  box-shadow: 0px -4px 0px 0px #10212a inset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: var(--Silver);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.icons {
+  width: 20px;
+  object-fit: contain;
+}
+
+@media (max-width: 550px) {
+  .container {
+    width: 96px;
+    height: 40px;
+    font-size: 0.875;
+    gap: 9px;
+    padding-bottom: 4px;
+  }
+
+  .icons {
+    width: 16px;
+  }
+}

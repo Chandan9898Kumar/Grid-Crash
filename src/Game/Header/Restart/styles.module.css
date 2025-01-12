@@ -1,0 +1,26 @@
+.container {
+  cursor: pointer;
+  width: 52px;
+  height: 48px;
+  border-radius: 10px;
+  background-color: #a8bfc9;
+  border: none;
+  box-shadow: 0px 4px 0px 0px #526d77;
+  position: relative;
+  bottom: 0px;
+  &:hover {
+    background-color: var(--Silver-Hover);
+    bottom: 4px;
+    box-shadow: 0px 8px 0px 0px #526d77;
+  }
+}
+
+.icon {
+  width: 20px;
+  object-fit: contain;
+  transform: rotate(0deg);
+}
+
+.container:hover .icon {
+  transform: rotate(360deg);
+}
