@@ -22,6 +22,7 @@ const DialogBox = ({ open, handleOpen, handleRestart }) => {
   const overlayRef = useRef();
   const dialogRef = useRef();
   const timerRef = useRef();
+
   useEffect(() => {
     if (open) {
       overlayRef.current.style.display = "flex";
@@ -41,6 +42,7 @@ const DialogBox = ({ open, handleOpen, handleRestart }) => {
       clearTimeout(timerRef.current);
     };
   }, [open]);
+
   return (
     <div className={styles.overlay} ref={overlayRef}>
       <dialog open={open} className={styles.dialog} ref={dialogRef}>

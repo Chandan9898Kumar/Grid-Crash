@@ -65,3 +65,78 @@
   letter-spacing: 2.5px;
   text-transform: uppercase;
 }
+
+.cancel,
+.restart {
+  height: 48px;
+  color: var(--Dark-Navy);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.cancel {
+  width: 139px;
+  background-color: var(--Silver);
+  box-shadow: 0px 4px 0px 0px #6b8997;
+  justify-self: end;
+  position: relative;
+  bottom: 0px;
+
+  &:hover {
+    bottom: 5px;
+    box-shadow: 0px 9px 0px 0px #6b8997;
+    background-color: var(--Silver-Hover);
+  }
+}
+
+.restart {
+  width: 151px;
+  background: var(--Light-Yellow);
+  box-shadow: 0px 4px 0px 0px #cc8b13;
+  position: relative;
+  bottom: 0px;
+
+  &:hover {
+    bottom: 5px;
+    box-shadow: 0px 9px 0px 0px #cc8b13;
+    background-color: var(--light-yellow-hover, #ffc860);
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    width: 40px;
+    height: 35px;
+  }
+
+  .container:hover {
+    box-shadow: 0px 6px 0px 0px #526d77;
+    bottom: 3px;
+  }
+
+  .icon {
+    width: 15px;
+  }
+}
+
+@media (max-width: 470px) {
+  .dialog {
+    height: 228px;
+    row-gap: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+    letter-spacing: 1.5px;
+  }
+}
