@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, lazy, Suspense } from "react";
-import styles from "./styles.module.css";
-import { motion } from "framer-motion";
 import LoaderPage from "Common/CircularLoader";
+import { motion } from "framer-motion";
+import React, { lazy, Suspense, useEffect, useRef } from "react";
+import styles from "./styles.module.css";
 const Header = lazy(() => import("./Header"));
 const Board = lazy(() => import("./Board"));
 const Scores = lazy(() => import("./Scores"));

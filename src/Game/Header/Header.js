@@ -1,8 +1,8 @@
-import React, { lazy, memo, Suspense } from "react";
+import LoaderPage from "Common/CircularLoader";
 import { motion } from "framer-motion";
+import React, { lazy, memo, Suspense } from "react";
 import icons from "./icons";
 import styles from "./styles.module.css";
-import LoaderPage from "Common/CircularLoader";
 const CurrentTurn = lazy(() => import("./CurrentTurn"));
 const Restart = lazy(() => import("./Restart"));
 const Header = ({ variants }) => {
