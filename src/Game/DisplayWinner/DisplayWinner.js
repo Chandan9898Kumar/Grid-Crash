@@ -7,7 +7,7 @@ const DisplayWinner = () => {
   const overlayRef = useRef();
   const dialogRef = useRef();
   const timerRef = useRef();
-  const winner = "x";
+  const winner = "";
 
   const handleQuit = () => {
     navigate("/");

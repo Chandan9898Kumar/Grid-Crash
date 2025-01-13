@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-
-const Scores = () => {
-  return <>Scores</>;
+import styles from './styles.module.css'
+const Scores = ({variants}) => {
+  return <div className={styles.container}>Scores</div>;
 };
 
 export default memo(Scores);
