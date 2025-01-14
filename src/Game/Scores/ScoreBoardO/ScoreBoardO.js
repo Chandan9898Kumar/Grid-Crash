@@ -1,8 +1,9 @@
 import React, { memo, useEffect } from "react";
-import styles from "./styles.module.css";
 
 import { motion } from "framer-motion";
-const ScoreBoardX = ({ variants }) => {
+import styles from "./styles.module.css";
+
+const ScoreBoardO = ({ variants }) => {
   const score = "";
   const playerOneMark = "";
   const playingAgainst = "";
@@ -10,18 +11,17 @@ const ScoreBoardX = ({ variants }) => {
 
   const playerTitle = () => {
     if (playingAgainst === "cpu")
-      return `X (${playerOneMark === "x" ? "YOU" : "CPU"})`;
+      return `O (${playerOneMark === "o" ? "YOU" : "CPU"})`;
     else if (playingAgainst === "player")
-      return `X (${playerOneMark === "x" ? "P1" : "P2"})`;
+      return `O (${playerOneMark === "o" ? "P1" : "P2"})`;
   };
 
   return (
     <motion.section className={styles.container} variants={variants}>
       <h1 className={styles.title}>{playerTitle()}</h1>
-
       <p className={styles.score}>{score}</p>
     </motion.section>
   );
 };
 
-export default memo(ScoreBoardX);
+export default memo(ScoreBoardO);
