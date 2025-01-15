@@ -2,18 +2,36 @@ import React, { memo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import icons from "./icons";
 import styles from "./styles.module.css";
+import { useSelector, useDispatch } from "react-redux";
 const DisplayWinner = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const overlayRef = useRef();
   const dialogRef = useRef();
   const timerRef = useRef();
-  const winner = "";
+  const winner = useSelector((state) => state?.board?.winner);
+  const menuOptions = useSelector((state) => state?.menuOptions);
+
+  const displayWinner = () => {
+    const playerOneMark = menuOptions.playerOneMark;
+    const against = menuOptions.playerAgainst;
+
+    if (playerOneMark === winner && against === "player")
+      return "Player 1 wins!";
+    else if (playerOneMark !== winner && against === "player")
+      return "Player 2 wins!";
+    else if (playerOneMark === winner && against === "cpu") return "You Won!";
+    else return "Oh No, you lost...";
+  };
 
   const handleQuit = () => {
+    dispatch({ type: "RESTART" });
     navigate("/");
   };
 
-  const handleNextRound = () => {};
+  const handleNextRound = () => {
+    dispatch({ type: "NEW_GAME" });
+  };
 
   useEffect(() => {
     if (winner) {
@@ -44,14 +62,14 @@ const DisplayWinner = () => {
           <h1 className={styles.title}>ROUND TIED</h1>
         ) : (
           <>
-            <h2 className={styles.title_one}>{"Winner Display"}</h2>
+            <h2 className={styles.title_one}>{displayWinner()}</h2>
             <h1
               className={styles.title_two}
               style={{ color: winner === "x" ? "#31c3bd" : "#f2b137" }}
             >
               <img
                 className={styles.icon}
-                src={icons[`icon${winner.toUpperCase()}`]}
+                src={icons[`icon${winner?.toUpperCase()}`]}
                 alt="winner-icon"
                 loading="lazy"
               />

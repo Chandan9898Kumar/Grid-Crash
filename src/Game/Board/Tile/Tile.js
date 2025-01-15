@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useRef } from "react";
 import styles from "./styles.module.css";
-// import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import { motion } from "framer-motion";
-// import marks from "./marks";
+import marks from "./marks";
 
 const Tile = ({ row, column, variants }) => {
   const markRef = useRef();
