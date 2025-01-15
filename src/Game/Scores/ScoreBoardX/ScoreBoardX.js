@@ -3,7 +3,6 @@ import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./styles.module.css";
 const ScoreBoardX = ({ variants }) => {
-  
   const score = useSelector((state) => state?.scores?.x);
   const playerOneMark = useSelector(
     (state) => state?.menuOptions?.playerOneMark
@@ -23,9 +22,11 @@ const ScoreBoardX = ({ variants }) => {
   };
 
   useEffect(() => {
-    dispatch({ type: "UPDATE_SCORE_X" });
+    if (winner === "x") {
+      dispatch({ type: "UPDATE_SCORE_X" });
+    }
   }, [winner, dispatch]);
-
+ 
   return (
     <motion.section className={styles.container} variants={variants}>
       <h1 className={styles.title}>{playerTitle()}</h1>
