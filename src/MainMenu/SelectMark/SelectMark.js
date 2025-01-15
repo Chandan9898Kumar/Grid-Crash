@@ -18,7 +18,7 @@ const Message = () => (
 const DisplayMessage = memo(Message);
 
 const Button = () => {
-  const mark = useSelector((state) => state?.menuOPtions?.playerOneMark);
+  const mark = useSelector((state) => state?.menuOptions?.playerOneMark);
 
   const dispatch = useDispatch();
 

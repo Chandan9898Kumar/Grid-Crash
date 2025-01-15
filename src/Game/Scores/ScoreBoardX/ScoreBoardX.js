@@ -1,12 +1,19 @@
-import React, { memo, useEffect } from "react";
-import styles from "./styles.module.css";
-
 import { motion } from "framer-motion";
+import React, { memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./styles.module.css";
 const ScoreBoardX = ({ variants }) => {
-  const score = "";
-  const playerOneMark = "";
-  const playingAgainst = "";
-  const winner = "";
+  
+  const score = useSelector((state) => state?.scores?.x);
+  const playerOneMark = useSelector(
+    (state) => state?.menuOptions?.playerOneMark
+  );
+  const playingAgainst = useSelector(
+    (state) => state?.menuOptions?.playerAgainst
+  );
+  const winner = useSelector((state) => state?.board?.winner);
+
+  const dispatch = useDispatch();
 
   const playerTitle = () => {
     if (playingAgainst === "cpu")
@@ -14,6 +21,10 @@ const ScoreBoardX = ({ variants }) => {
     else if (playingAgainst === "player")
       return `X (${playerOneMark === "x" ? "P1" : "P2"})`;
   };
+
+  useEffect(() => {
+    dispatch({ type: "UPDATE_SCORE_X" });
+  }, [winner, dispatch]);
 
   return (
     <motion.section className={styles.container} variants={variants}>

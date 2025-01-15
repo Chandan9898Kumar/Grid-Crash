@@ -3,7 +3,7 @@ import menuOptionsReducer from "./menuOptionsReducer";
 import { combineReducers } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
-  menuOPtions: menuOptionsReducer,
+  menuOptions: menuOptionsReducer,
 });
 
 export default rootReducer;

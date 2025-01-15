@@ -1,6 +1,6 @@
 import LoaderPage from "Common/CircularLoader";
 import { motion } from "framer-motion";
-import React, { lazy, Suspense, useEffect, memo, useCallback } from "react";
+import React, { lazy, memo, Suspense, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "./icons";
@@ -58,17 +58,18 @@ const MainMenu = () => {
   };
 
   const playAgainstCpu = useCallback(() => {
-    dispatch({type: 'UPDATE_PLAYER', against: 'cpu'})
+    dispatch({ type: "UPDATE_PLAYER", against: "cpu" });
     navigate("/game");
-  }, [navigate,dispatch]);
+  }, [navigate, dispatch]);
 
   const playAgainstPlayer = useCallback(() => {
-    dispatch({type: 'UPDATE_PLAYER', against: 'player'})
+    dispatch({ type: "UPDATE_PLAYER", against: "player" });
     navigate("/game");
-  }, [navigate,dispatch]);
+  }, [navigate, dispatch]);
 
   useEffect(() => {
-    // dispatch({ type: "RESTART" });
+    dispatch({ type: "RESET" });
+    dispatch({ type: "RESTART" });
   }, [dispatch]);
 
   return (
