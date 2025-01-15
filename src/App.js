@@ -1,9 +1,9 @@
-import "./App.css";
+import LoaderPage from "Common/CircularLoader"; // Using alias for Common directory
 import React, { Suspense, lazy } from "react";
-// import { Provider } from "react-redux";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoaderPage from "Common/CircularLoader";  // Using alias for Common directory
-
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import store from "./Store";
 const lazyWithRetry = (componentImport) =>
   lazy(async () => {
     try {
@@ -18,14 +18,16 @@ const MainMenu = lazyWithRetry(() => import("./MainMenu"));
 const Game = lazyWithRetry(() => import("./Game"));
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<LoaderPage />}>
-        <Routes>
-          <Route path="/" element={<MainMenu />} />
-          <Route path="/game" element={<Game />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Suspense fallback={<LoaderPage />}>
+          <Routes>
+            <Route path="/" element={<MainMenu />} />
+            <Route path="/game" element={<Game />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

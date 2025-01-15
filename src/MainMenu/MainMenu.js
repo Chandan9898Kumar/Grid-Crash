@@ -45,6 +45,7 @@ const DisplayImage = memo(Image);
 
 const MainMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const variants = {
     hidden: {
@@ -57,12 +58,18 @@ const MainMenu = () => {
   };
 
   const playAgainstCpu = useCallback(() => {
+    dispatch({type: 'UPDATE_PLAYER', against: 'cpu'})
     navigate("/game");
-  }, [navigate]);
+  }, [navigate,dispatch]);
 
   const playAgainstPlayer = useCallback(() => {
+    dispatch({type: 'UPDATE_PLAYER', against: 'player'})
     navigate("/game");
-  }, [navigate]);
+  }, [navigate,dispatch]);
+
+  useEffect(() => {
+    // dispatch({ type: "RESTART" });
+  }, [dispatch]);
 
   return (
     <motion.div

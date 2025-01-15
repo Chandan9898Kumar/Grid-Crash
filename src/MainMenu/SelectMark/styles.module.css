@@ -57,7 +57,7 @@
   border-radius: 10px;
   background-color: #a8bfc9;
   position: absolute;
-  transition: width 0.2s linear;
+  transition: width 0.5s linear;
   z-index: var(--closer);
 }
 
