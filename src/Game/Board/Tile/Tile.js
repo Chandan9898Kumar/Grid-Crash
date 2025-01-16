@@ -1,8 +1,8 @@
-import React, { memo, useEffect, useRef } from "react";
-import styles from "./styles.module.css";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { motion } from "framer-motion";
+import React, { memo, useEffect, useRef } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import marks from "./marks";
+import styles from "./styles.module.css";
 
 const Tile = ({ row, column, variants }) => {
   const markRef = useRef();
@@ -42,8 +42,7 @@ tile based on changes in the `tile` and `turn` variables. Here's a breakdown of 
       // tile has been reset
       tileRef.current.style.pointerEvents = "";
       tileRef.current.style.backgroundColor = "";
-      markRef.current.src =
-        turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
+      markRef.current.src = turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
       markRef.current.style.transform = "";
     } else {
       // tile has been selected
@@ -52,6 +51,20 @@ tile based on changes in the `tile` and `turn` variables. Here's a breakdown of 
       markRef.current.style.transform = "scale(1)";
     }
   }, [tile, turn]);
+
+  /**
+   * This function updates the background color and image of a tile when a player (X or O) wins the game of Tic-Tac-Toe.
+   * It checks if the current tile is part of the winning combination (rows, columns, or diagonals) and applies the appropriate styles once a player has won.
+   */
+  useEffect(() => {
+    if (!winningTiles?.length) return;
+    winningTiles.forEach((winningTile) => {
+      if (winningTile[0] === row && winningTile[1] === column) {
+        tileRef.current.style.backgroundColor = tile === "x" ? "#31C3BD" : "#F2B137";
+        markRef.current.src = marks[`winning${tile?.toUpperCase()}`];
+      }
+    });
+  }, [winningTiles, row, column, tile]);
 
   return (
     <motion.div
