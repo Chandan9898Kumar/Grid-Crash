@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-
+import { useDispatch } from "react-redux";
 import restartIcon from "./icons";
 import styles from "./styles.module.css";
 
@@ -66,13 +66,16 @@ const DisplayDialogBox = memo(DialogBox);
 const Restart = () => {
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleOpen = useCallback(() => {
     setOpen(!open);
   }, [open]);
 
   const handleRestart = useCallback(() => {
     setOpen(false);
-  }, []);
+    dispatch({ type: "RESTART" });
+  }, [dispatch]);
   return (
     <>
       <OpenDialogBox handleOpen={handleOpen} />
