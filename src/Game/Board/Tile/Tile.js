@@ -9,12 +9,11 @@ const Tile = ({ row, column, variants }) => {
   const tileRef = useRef();
   const dispatch = useDispatch();
   const tile = useSelector((state) => state?.board?.tiles[row][column]);
-  const winningTiles = useSelector(
-    (state) => state?.board?.winningTiles,
-    shallowEqual
-  );
+  const winningTiles = useSelector((state) => state?.board?.winningTiles,shallowEqual);
   const turn = useSelector((state) => state?.turn);
-  console.log(tile, "tile >>>>>>>>>>>>>>>>>>>>>>");
+
+  const board = useSelector(state => state.board.tiles);
+  
 
   const childVariants = {
     hidden: { opacity: 0 },
@@ -22,6 +21,7 @@ const Tile = ({ row, column, variants }) => {
   };
 
   const handleMark = () => {
+    console.log(tile, "tile >>>>>>>>>>>>>>>>>>>>>>",board,row,column,turn);
     dispatch({ type: "UPDATE_BOARD", row, column, turn });
     dispatch({ type: "CHECK_BOARD" });
     dispatch({ type: "CHECK_DRAW" });
