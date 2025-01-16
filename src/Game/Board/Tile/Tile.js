@@ -9,10 +9,7 @@ const Tile = ({ row, column, variants }) => {
   const tileRef = useRef();
   const dispatch = useDispatch();
   const tile = useSelector((state) => state?.board?.tiles[row][column]);
-  const winningTiles = useSelector(
-    (state) => state?.board?.winningTiles,
-    shallowEqual
-  );
+  const winningTiles = useSelector((state) => state?.board?.winningTiles,shallowEqual);
   const turn = useSelector((state) => state?.turn);
 
   const childVariants = {
@@ -21,10 +18,10 @@ const Tile = ({ row, column, variants }) => {
   };
 
   const handleMark = () => {
-    // dispatch({type: 'UPDATE_BOARD', row, column, turn});
-    // dispatch({type: 'CHECK_BOARD'});
-    // dispatch({type: 'CHECK_DRAW'});
-    // dispatch({type: 'CHANGE_TURN'});
+    dispatch({ type: "UPDATE_BOARD", row, column, turn });
+    dispatch({ type: "CHECK_BOARD" });
+    dispatch({ type: "CHECK_DRAW" });
+    dispatch({ type: "CHANGE_TURN" });
   };
 
   /* The `useEffect` hook in the code snippet is responsible for updating the image source of the mark
@@ -38,26 +35,23 @@ const Tile = ({ row, column, variants }) => {
       turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
   }, [turn, tile]);
 
-
-
-
-/* The `useEffect` hook in the provided code snippet is responsible for updating the appearance of the
+  /* The `useEffect` hook in the provided code snippet is responsible for updating the appearance of the
 tile based on changes in the `tile` and `turn` variables. Here's a breakdown of what it does: */
-  useEffect(()=>{
-
-    if(tile===0){   // tile has been reset
-      tileRef.current.style.pointerEvents=''
-      tileRef.current.style.backgroundColor = '';   
-      markRef.current.src= turn ==='x' ? marks["hoverIconX"] : marks["hoverIconO"]
-      markRef.current.style.transform = ''
-    }else{  // tile has been selected
-      tileRef.current.style.pointerEvents='none'
-      markRef.current.src = tile==='x' ? marks['iconX'] : marks['iconO']
-      markRef.current.style.transform ='scale(1'
+  useEffect(() => {
+    if (tile === 0) {
+      // tile has been reset
+      tileRef.current.style.pointerEvents = "";
+      tileRef.current.style.backgroundColor = "";
+      markRef.current.src =
+        turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
+      markRef.current.style.transform = "";
+    } else {
+      // tile has been selected
+      tileRef.current.style.pointerEvents = "none";
+      markRef.current.src = tile === "x" ? marks["iconX"] : marks["iconO"];
+      markRef.current.style.transform = "scale(1)";
     }
-
-  },[tile,turn])
-
+  }, [tile, turn]);
 
   return (
     <motion.div
