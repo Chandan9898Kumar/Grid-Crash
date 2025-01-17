@@ -23,17 +23,18 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {/* <button
+        <button
           className="clean-btn toggleButton_MMFG"
           type="button"
           title="Switch between dark and light mode (currently light mode)"
           aria-label="Switch between dark and light mode (currently light mode)"
           aria-live="polite"
           aria-pressed="false"
+          style={{ color: isThemeDark ? "white" : "plum" }}
           onClick={() => setIsThemeDark(!isThemeDark)}
         >
           {isThemeDark ? SvgIcons.SvgDarkMode() : SvgIcons.SvgLightMode()}
-        </button> */}
+        </button>
         <Suspense fallback={<LoaderPage />}>
           <Routes>
             <Route path="/" element={<MainMenu />} />

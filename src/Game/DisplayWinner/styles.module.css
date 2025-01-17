@@ -14,7 +14,7 @@
   border: none;
   width: 100%;
   height: 266px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;

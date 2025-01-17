@@ -39,7 +39,7 @@ const DisplayWinner = ({ variants }) => {
       overlayRef.current.style.display = "flex";
       timerRef.current = setTimeout(() => {
         if (!overlayRef.current || !dialogRef.current) return;
-        overlayRef.current.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        overlayRef.current.style.backgroundColor = "";
         dialogRef.current.style.transform = "scaleY(1)";
       }, 10);
     } else {

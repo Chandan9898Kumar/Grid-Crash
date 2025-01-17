@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
   mode: isProduction ? "production" : "development", //this will set the mode to production, which will minify the code and make it production ready
 
-  // devtool: isProduction ? false : 'source-map', // Disable source maps in production
+  devtool: isProduction ? false : 'source-map', // Disable source maps in production
 
   name: "React Webpack",
 
@@ -22,14 +22,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/build"),
     pathinfo: true,
-    filename:
-      process.env.NODE_ENV === "production"
-        ? "[name].[chunkhash].js"
-        : "[name].[fullhash].js",
-    chunkFilename:
-      process.env.NODE_ENV === "production"
-        ? "chunk.[name].[chunkhash].js"
-        : "chunk.[name].[fullhash].js",
+    filename: isProduction ? "[name].[contenthash].js" : "[name].[fullhash].js",
+    chunkFilename: isProduction ? "[name].[contenthash].js" : "[name].[fullhash].js",
     libraryTarget: "umd",
     clean: true, // Clean the output directory before emit.
     assetModuleFilename: "[name][ext]",
@@ -90,8 +84,8 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-      chunkFilename: "[id].css",
+      filename: isProduction ? "[name].[contenthash].css" : "[name].[fullhash].css",
+      chunkFilename: isProduction ? "[name].[contenthash].css" : "[name].[fullhash].css",
     }),
     new CompressionPlugin({
       filename: "[path][base].gz",
