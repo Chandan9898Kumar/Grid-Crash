@@ -10,6 +10,6 @@ status = 200
 
 
 [[redirects]]
-  from = "/service-worker.js"
+  from = "/serviceWorker.js"
   to = "/sw.js"
   status = 200
