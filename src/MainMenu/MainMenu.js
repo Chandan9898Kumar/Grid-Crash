@@ -36,7 +36,7 @@ const Image = ({ variants }) => (
     src={logo}
     variants={variants}
     alt="logo"
-    fetchpriority="high"
+    fetchPriority="high"
     loading="eager"
     draggable={false}
   />
