@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production",
+    "build": "cross-env GENERATE_SOURCEMAP=false npm run build",
     "winBuild": "set \"GENERATE_SOURCEMAP=false\" && webpack --mode production",
     "test": "jest --env=jsdom",
     "eject": "react-scripts eject"

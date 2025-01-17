@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
   mode: isProduction ? "production" : "development", //this will set the mode to production, which will minify the code and make it production ready
 
-  devtool: isProduction ? false : 'source-map', // Disable source maps in production
+  // devtool: isProduction ? false : 'source-map', // Disable source maps in production
 
   name: "React Webpack",
 
