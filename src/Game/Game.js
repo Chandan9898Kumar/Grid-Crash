@@ -25,7 +25,6 @@ const Game = () => {
     },
   };
 
- 
   return (
     <>
       <Suspense fallback={<LoaderPage />}>
@@ -41,7 +40,15 @@ const Game = () => {
           <Scores variants={variants} />
         </motion.div>
 
-        {winner && <DisplayWinner />}
+        {winner && (
+          <motion.div
+            initial="hidden"
+            animate="show"
+            transition={{ staggerChildren: 0.2 }}
+          >
+            <DisplayWinner variants={variants} />
+          </motion.div>
+        )}
       </Suspense>
     </>
   );

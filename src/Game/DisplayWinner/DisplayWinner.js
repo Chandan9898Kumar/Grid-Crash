@@ -1,9 +1,10 @@
+import { motion } from "framer-motion";
 import React, { memo, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import icons from "./icons";
 import styles from "./styles.module.css";
-import { useSelector, useDispatch } from "react-redux";
-const DisplayWinner = () => {
+const DisplayWinner = ({ variants }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const overlayRef = useRef();
@@ -77,19 +78,20 @@ const DisplayWinner = () => {
             </h1>
           </>
         )}
-
-        <div className={styles.buttons}>
-          <button type="button" className={styles.quit} onClick={handleQuit}>
-            Quit
-          </button>
-          <button
-            type="button"
-            className={styles.next}
-            onClick={handleNextRound}
-          >
-            Next Round
-          </button>
-        </div>
+        <motion.header variants={variants}>
+          <div className={styles.buttons}>
+            <button type="button" className={styles.quit} onClick={handleQuit}>
+              Quit
+            </button>
+            <button
+              type="button"
+              className={styles.next}
+              onClick={handleNextRound}
+            >
+              Next Round
+            </button>
+          </div>
+        </motion.header>
       </dialog>
     </div>
   );
