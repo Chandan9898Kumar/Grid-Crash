@@ -7,19 +7,19 @@ const CurrentTurn = lazy(() => import("./CurrentTurn"));
 const Restart = lazy(() => import("./Restart"));
 const Header = ({ variants }) => {
   return (
-    <motion.header className={styles.headerBar} variants={variants}>
-      <img
-        className={styles.logo}
-        src={icons["logo"]}
-        alt="header-image"
-        loading="lazy"
-      />
+    <Suspense fallback={<LoaderPage />}>
+      <motion.header className={styles.headerBar} variants={variants}>
+        <img
+          className={styles.logo}
+          src={icons["logo"]}
+          alt="header-image"
+          loading="lazy"
+        />
 
-      <Suspense fallback={<LoaderPage />}>
         <CurrentTurn />
         <Restart />
-      </Suspense>
-    </motion.header>
+      </motion.header>
+    </Suspense>
   );
 };
 
