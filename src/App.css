@@ -62,7 +62,7 @@ a {
   font-family: inherit;
 }
 
-.toggleButton_MMFG {
+.toggleButton {
   -webkit-tap-highlight-color: transparent;
   width: 100%;
   height: 100%;
