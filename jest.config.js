@@ -57,12 +57,14 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    // Add this line to map the Common directory
+    "^Common/(.*)$": "<rootDir>/src/Common/$1",
+    // Keep your existing moduleNameMapper settings
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
       "<rootDir>/__mocks__/fileMock.js",
     "\\.(scss|sass|css)$": "identity-obj-proxy",
     "^axios$": "axios/dist/node/axios.cjs",
   },
-
   transformIgnorePatterns: [
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
     "^.+\\.module\\.(css|sass|scss)$",
@@ -89,5 +91,5 @@ module.exports = {
   },
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
 };

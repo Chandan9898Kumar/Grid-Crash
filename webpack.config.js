@@ -9,13 +9,13 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
   mode: isProduction ? "production" : "development", //this will set the mode to production, which will minify the code and make it production ready
 
-  // devtool: isProduction ? false : 'source-map', // Disable source maps in production
+  // Add source-map optimization
+  devtool: isProduction ? "hidden-source-map" : "eval-cheap-module-source-map",
 
   name: "React Webpack",
 
@@ -42,6 +42,11 @@ module.exports = {
       Common: path.resolve(__dirname, "src/Common/"), // Alias for common directory
     },
     modules: [path.resolve(__dirname, "src"), "node_modules"], // Look for modules in src and node_modules
+    symlinks: false, // Don't follow symlinks
+    cacheWithContext: false,
+    fallback: {
+      path: require.resolve("path-browserify"),
+    },
   },
 
   plugins: [
@@ -196,4 +201,10 @@ module.exports = {
   },
 
   performance: false,
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
 };
