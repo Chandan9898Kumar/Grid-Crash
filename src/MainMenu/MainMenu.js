@@ -1,6 +1,6 @@
-import LoaderPage from "Common/CircularLoader";
+
 import { motion } from "framer-motion";
-import React, { lazy, memo, Suspense, useCallback, useEffect } from "react";
+import React, { lazy, memo, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "./icons";
@@ -80,13 +80,9 @@ const MainMenu = () => {
       transition={{ staggerChildren: 0.6 }}
     >
       <DisplayImage variants={variants} />
-      <Suspense fallback={<LoaderPage />}>
-        <SelectMark variants={variants} />
-      </Suspense>
+      <SelectMark variants={variants} />
       <DisplayCpuButton variants={variants} playAgainstCpu={playAgainstCpu} />
-      <DisplayPlayerButton
-        variants={variants}
-        playAgainstPlayer={playAgainstPlayer}
+      <DisplayPlayerButton variants={variants} playAgainstPlayer={playAgainstPlayer}
       />
     </motion.div>
   );
