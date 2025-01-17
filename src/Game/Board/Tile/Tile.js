@@ -12,16 +12,12 @@ const Tile = ({ row, column, variants }) => {
   const winningTiles = useSelector((state) => state?.board?.winningTiles,shallowEqual);
   const turn = useSelector((state) => state?.turn);
 
-  const board = useSelector(state => state.board.tiles);
-  
-
   const childVariants = {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
   };
 
   const handleMark = () => {
-    console.log(tile, "tile >>>>>>>>>>>>>>>>>>>>>>",board,row,column,turn);
     dispatch({ type: "UPDATE_BOARD", row, column, turn });
     dispatch({ type: "CHECK_BOARD" });
     dispatch({ type: "CHECK_DRAW" });
@@ -35,7 +31,8 @@ const Tile = ({ row, column, variants }) => {
       return;
     }
 
-    markRef.current.src = turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
+    markRef.current.src =
+      turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
   }, [turn, tile]);
 
   /* The `useEffect` hook in the provided code snippet is responsible for updating the appearance of the
@@ -44,7 +41,8 @@ tile based on changes in the `tile` and `turn` variables. Here's a breakdown of 
     if (tile === 0) {
       //tile has been reset
       tileRef.current.style.pointerEvents = "";
-      markRef.current.src = turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
+      markRef.current.src =
+        turn === "x" ? marks["hoverIconX"] : marks["hoverIconO"];
       markRef.current.style.transform = "";
       tileRef.current.style.backgroundColor = "";
     } else {
