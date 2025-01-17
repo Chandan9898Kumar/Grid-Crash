@@ -36,7 +36,9 @@ const Image = ({ variants }) => (
     src={logo}
     variants={variants}
     alt="logo"
-    loading="lazy"
+    fetchpriority="high"
+    loading="eager"
+    draggable={false}
   />
 );
 
