@@ -10,6 +10,7 @@ const DisplayWinner = lazy(() => import("./DisplayWinner"));
 const Game = () => {
   const containerRef = useRef();
   const firstRender = useRef(true);
+  const timerRef = useRef();
   const board = useSelector((state) => state?.board?.tiles);
   const winner = useSelector((state) => state?.board?.winner);
   const menuOptions = useSelector((state) => state?.menuOptions);
@@ -25,21 +26,53 @@ const Game = () => {
     },
   };
 
+  //this function is handles the moves for the cpu
+  useEffect(() => {
+    const playerOneMark = menuOptions.playerOneMark;
+    const against = menuOptions.playerAgainst;
+    if (winner) return;
+    else if (against === "cpu" && playerOneMark !== turn) {
+      containerRef.current.style.pointerEvents = "none";
+      timerRef.current = setTimeout(
+        () => {
+          if (!containerRef.current) return;
+          dispatch({ type: "CPU_MOVE", mark: turn });
+          dispatch({ type: "CHECK_BOARD" });
+          dispatch({ type: "CHECK_DRAW" });
+          dispatch({ type: "CHANGE_TURN" });
+          containerRef.current.style.pointerEvents = "";
+        },
+        playerOneMark === "o" ? (firstRender.current ? 3000 : 800) : 800
+      );
+      firstRender.current = false;
+    }
+
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  }, [
+    board,
+    winner,
+    turn,
+    menuOptions.playerOneMark,
+    menuOptions.playerAgainst,
+    dispatch,
+  ]);
+
   return (
     <>
+      <motion.div
+        className={styles.container}
+        ref={containerRef}
+        initial="hidden"
+        animate="show"
+        transition={{ staggerChildren: 0.2 }}
+      >
+        <Header variants={variants} />
+        <Board variants={variants} />
+        <Scores variants={variants} />
+      </motion.div>
       <Suspense fallback={<LoaderPage />}>
-        <motion.div
-          className={styles.container}
-          ref={containerRef}
-          initial="hidden"
-          animate="show"
-          transition={{ staggerChildren: 0.2 }}
-        >
-          <Header variants={variants} />
-          <Board variants={variants} />
-          <Scores variants={variants} />
-        </motion.div>
-
         {winner && (
           <motion.div
             initial="hidden"

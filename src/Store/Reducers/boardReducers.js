@@ -94,6 +94,35 @@ export default function boardReducer(
   const allTiles = board.tiles;
 
   switch (action.type) {
+    case "CPU_MOVE":
+      let column = Math.floor(Math.random() * 3);
+      let row = Math.floor(Math.random() * 3);
+      const mark = action.mark;
+      const copyTiles = JSON.parse(JSON.stringify(allTiles));
+      const hasCpuEmptyTile = allTiles.every((tile) => !tile.includes(0));
+      if (hasCpuEmptyTile)
+        return {
+          tiles: copyTiles,
+          winner: board.winner,
+          winningTiles: board.winningTiles,
+        };
+      else {
+        do {
+          if (copyTiles[row][column] !== 0) {
+            column = Math.floor(Math.random() * 3);
+            row = Math.floor(Math.random() * 3);
+          } else {
+            copyTiles[row][column] = mark;
+            break;
+          }
+        } while (true);
+        return {
+          tiles: copyTiles,
+          winner: board.winner,
+          winningTiles: board.winningTiles,
+        };
+      }
+
     case "UPDATE_BOARD":
       const rowToUpdate = action.row;
       const columnToUpdate = action.column;

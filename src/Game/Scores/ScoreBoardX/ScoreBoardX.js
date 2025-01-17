@@ -26,7 +26,7 @@ const ScoreBoardX = ({ variants }) => {
       dispatch({ type: "UPDATE_SCORE_X" });
     }
   }, [winner, dispatch]);
- 
+
   return (
     <motion.section className={styles.container} variants={variants}>
       <h1 className={styles.title}>{playerTitle()}</h1>
