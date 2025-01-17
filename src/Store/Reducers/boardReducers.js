@@ -13,7 +13,6 @@ export default function boardReducer(
   const allTiles = board.tiles;
 
   switch (action.type) {
-
     
     case "UPDATE_BOARD":
       const rowToUpdate = action.row;
@@ -35,6 +34,16 @@ export default function boardReducer(
         winner: board.winner,
         winningTiles: board.winningTiles,
       };
+
+    case "CHECK_DRAW":
+      const hasEmptyTile = allTiles.every((tile) => !tile.includes(0));
+      const isGameOver = board.winner;
+
+      if (hasEmptyTile && !isGameOver) {
+        return { tiles: allTiles, winner: "draw", winningTiles: [] };
+      } else {
+        return board;
+      }
 
     case "SET_DRAW":
       return { tiles: board.tiles, winner: "draw", winningTiles: [] };
