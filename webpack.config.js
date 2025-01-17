@@ -7,6 +7,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -23,7 +25,9 @@ module.exports = {
     path: path.join(__dirname, "/build"),
     pathinfo: true,
     filename: isProduction ? "[name].[contenthash].js" : "[name].[fullhash].js",
-    chunkFilename: isProduction ? "[name].[contenthash].js" : "[name].[fullhash].js",
+    chunkFilename: isProduction
+      ? "[name].[contenthash].js"
+      : "[name].[fullhash].js",
     libraryTarget: "umd",
     clean: true, // Clean the output directory before emit.
     assetModuleFilename: "[name][ext]",
@@ -41,6 +45,9 @@ module.exports = {
   },
 
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: "public", to: "" }],
+    }),
     new HtmlWebpackPlugin({
       //this plugin will help us generate the production html file in our /build
       filename: "index.html", //our production html file will be named index.html
@@ -84,8 +91,12 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: isProduction ? "[name].[contenthash].css" : "[name].[fullhash].css",
-      chunkFilename: isProduction ? "[name].[contenthash].css" : "[name].[fullhash].css",
+      filename: isProduction
+        ? "[name].[contenthash].css"
+        : "[name].[fullhash].css",
+      chunkFilename: isProduction
+        ? "[name].[contenthash].css"
+        : "[name].[fullhash].css",
     }),
     new CompressionPlugin({
       filename: "[path][base].gz",
