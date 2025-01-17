@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import React, { lazy, memo, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -57,19 +56,33 @@ const MainMenu = () => {
     },
   };
 
+  const handleGameStart = useCallback(
+    (against) => {
+      try {
+        dispatch({ type: "UPDATE_PLAYER", against });
+        navigate("/game");
+      } catch (error) {
+        console.error("Error starting game:", error);
+        // Handle error appropriately
+      }
+    },
+    [navigate, dispatch]
+  );
+
   const playAgainstCpu = useCallback(() => {
-    dispatch({ type: "UPDATE_PLAYER", against: "cpu" });
-    navigate("/game");
-  }, [navigate, dispatch]);
+    handleGameStart("cpu");
+  }, [handleGameStart]);
 
   const playAgainstPlayer = useCallback(() => {
-    dispatch({ type: "UPDATE_PLAYER", against: "player" });
-    navigate("/game");
-  }, [navigate, dispatch]);
+    handleGameStart("player");
+  }, [handleGameStart]);
 
   useEffect(() => {
-    dispatch({ type: "RESET" });
-    dispatch({ type: "RESTART" });
+    // Batch multiple dispatches
+    dispatch((dispatch) => {
+      dispatch({ type: "RESET" });
+      dispatch({ type: "RESTART" });
+    });
   }, [dispatch]);
 
   return (
@@ -82,7 +95,9 @@ const MainMenu = () => {
       <DisplayImage variants={variants} />
       <SelectMark variants={variants} />
       <DisplayCpuButton variants={variants} playAgainstCpu={playAgainstCpu} />
-      <DisplayPlayerButton variants={variants} playAgainstPlayer={playAgainstPlayer}
+      <DisplayPlayerButton
+        variants={variants}
+        playAgainstPlayer={playAgainstPlayer}
       />
     </motion.div>
   );
