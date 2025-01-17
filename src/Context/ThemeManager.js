@@ -7,7 +7,7 @@ export const ChangeTheme = () => {
 };
 
 const ThemeManager = ({ children }) => {
-  const [isThemeDark, setIsThemeDark] = useState(false);
+  const [isThemeDark, setIsThemeDark] = useState(true);
 
   useEffect(() => {
     document.documentElement.setAttribute(
