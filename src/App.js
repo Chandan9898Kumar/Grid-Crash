@@ -11,6 +11,7 @@ import store from "./Store";
 // Implemented retry mechanism with exponential backoff
 // More graceful handling of loading failures
 // Limited number of retries before forcing a reload.
+
 const lazyWithRetry = (componentImport) => {
   const maxRetries = 2;
   return lazy(async () => {
