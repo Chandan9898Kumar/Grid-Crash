@@ -98,5 +98,6 @@ Without preloading: Components are only loaded when the user navigates to their 
 
 With preloading: Components start loading in the background shortly after initial page load
 
-This means when a user clicks to navigate, the component is already downloaded or in progress
+This means when a user clicks to navigate, the component is already downloaded or in progress.
+
  */
